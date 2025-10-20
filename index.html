@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PuriEnf</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-		{
-		.dashboard,
+<style>
+        * 
+		{.dashboard,
 		.charts-section {
 			display: none;
 		}
@@ -25,7 +20,12 @@
 		.charts-section.visible {
 			display: block;
 		}
-		
+		{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -76,7 +76,9 @@
             color: #7f8c8d;
             font-size: 16px;
             font-weight: 400;
+			margin-top: 15px;
         }
+		
 		.subtitle-author{
 			color: #FFFFFF;
 			font-size: 15px;
@@ -203,38 +205,6 @@
             transform: translateY(0);
         }
 
-		.reset-button {
-			width: 100%;
-			max-width: 400px;
-			margin: 15px auto 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 10px;
-			background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-			color: white;
-			border: none;
-			padding: 18px 30px;
-			border-radius: 12px;
-			font-size: 16px;
-			font-weight: 600;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-		}
-
-		.reset-button:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
-		}
-
-		.reset-button:active {
-			transform: translateY(0);
-		}
-
-		.reset-button.hidden {
-			display: none;
-		}
         .dashboard {
             padding: 40px;
             background: white;
@@ -374,6 +344,39 @@
                 transform: rotate(360deg);
             }
         }
+		
+		.reset-button {
+			width: 100%;
+			max-width: 400px;
+			margin: 15px auto 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+			color: white;
+			border: none;
+			padding: 18px 30px;
+			border-radius: 12px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+		}
+
+		.reset-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+		}
+
+		.reset-button:active {
+			transform: translateY(0);
+		}
+
+		.reset-button.hidden {
+			display: none;
+		}
     </style>
 </head>
 <body>
@@ -839,42 +842,42 @@
 				
 				// Atualizar gráficos
 				updateCharts(gender, weight, height, ageInMonths);
-			// Mostrar dashboard e gráficos
-			document.querySelector('.dashboard').classList.add('visible');
-			document.querySelector('.charts-section').classList.add('visible');
+				
+				// Mostrar dashboard e gráficos
+				document.querySelector('.dashboard').classList.add('visible');
+				document.querySelector('.charts-section').classList.add('visible');
 			
-			// ADICIONE ESTA LINHA:
-			// Mostrar botão de reset
-			document.querySelector('.reset-button').classList.remove('hidden');
-			
-			// Scroll suave até os resultados
-			document.querySelector('.dashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}
+				// Mostrar botão de reset
+				document.querySelector('.reset-button').classList.remove('hidden');
+				
+				// Scroll suave até os resultados
+				document.querySelector('.dashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}
         // Inicializar gráficos quando a página carregar
         window.onload = function() {
             initCharts();
         };
 
-		function resetForm() {
-			// Limpar campos do formulário
-			document.getElementById('birthdate').value = '';
-			document.getElementById('weight').value = '';
-			document.getElementById('height').value = '';
-			document.getElementById('male').checked = true;
-			
-			// Resetar valores exibidos
-			document.getElementById('weight-value').textContent = '-';
-			document.getElementById('height-value').textContent = '-';
-			
-			// Ocultar dashboard e gráficos
-			document.querySelector('.dashboard').classList.remove('visible');
-			document.querySelector('.charts-section').classList.remove('visible');
-			
-			document.querySelector('.reset-button').classList.add('hidden');
-			
-			// Scroll suave de volta ao topo do formulário
-			document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}		
+			function resetForm() {
+				// Limpar campos do formulário
+				document.getElementById('birthdate').value = '';
+				document.getElementById('weight').value = '';
+				document.getElementById('height').value = '';
+				document.getElementById('male').checked = true;
+				
+				// Resetar valores exibidos
+				document.getElementById('weight-value').textContent = '-';
+				document.getElementById('height-value').textContent = '-';
+				
+				// Ocultar dashboard e gráficos
+				document.querySelector('.dashboard').classList.remove('visible');
+				document.querySelector('.charts-section').classList.remove('visible');
+				
+				document.querySelector('.reset-button').classList.add('hidden');
+				
+				// Scroll suave de volta ao topo do formulário
+				document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}		
     </script>
 </body>
 </html>
