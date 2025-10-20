@@ -11,7 +11,21 @@
             padding: 0;
             box-sizing: border-box;
         }
+		{
+		.dashboard,
+		.charts-section {
+			display: none;
+		}
 
+		.dashboard.visible,
+		.charts-section.visible {
+			display: flex;
+		}
+
+		.charts-section.visible {
+			display: block;
+		}
+		
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -189,6 +203,38 @@
             transform: translateY(0);
         }
 
+		.reset-button {
+			width: 100%;
+			max-width: 400px;
+			margin: 15px auto 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+			color: white;
+			border: none;
+			padding: 18px 30px;
+			border-radius: 12px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+		}
+
+		.reset-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+		}
+
+		.reset-button:active {
+			transform: translateY(0);
+		}
+
+		.reset-button.hidden {
+			display: none;
+		}
         .dashboard {
             padding: 40px;
             background: white;
@@ -394,6 +440,10 @@
                 <span>🔍</span>
                 Analisar Crescimento
             </button>
+			<button class="reset-button hidden" onclick="resetForm()">
+				<span>🔄</span>
+				Limpar Dados
+			</button>
         </div>
         
         <div class="dashboard">
@@ -405,7 +455,7 @@
                 <div class="metric-value" id="weight-value">-</div>
                 <div class="metric-range">
                     <span id="min-weight">1 kg</span>
-                    <span id="max-weight">50 kg</span>
+                    <span id="max-weight">100 kg</span>
                 </div>
             </div>
             
@@ -789,11 +839,42 @@
 				
 				// Atualizar gráficos
 				updateCharts(gender, weight, height, ageInMonths);
-			}
+			// Mostrar dashboard e gráficos
+			document.querySelector('.dashboard').classList.add('visible');
+			document.querySelector('.charts-section').classList.add('visible');
+			
+			// ADICIONE ESTA LINHA:
+			// Mostrar botão de reset
+			document.querySelector('.reset-button').classList.remove('hidden');
+			
+			// Scroll suave até os resultados
+			document.querySelector('.dashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
         // Inicializar gráficos quando a página carregar
         window.onload = function() {
             initCharts();
         };
+
+		function resetForm() {
+			// Limpar campos do formulário
+			document.getElementById('birthdate').value = '';
+			document.getElementById('weight').value = '';
+			document.getElementById('height').value = '';
+			document.getElementById('male').checked = true;
+			
+			// Resetar valores exibidos
+			document.getElementById('weight-value').textContent = '-';
+			document.getElementById('height-value').textContent = '-';
+			
+			// Ocultar dashboard e gráficos
+			document.querySelector('.dashboard').classList.remove('visible');
+			document.querySelector('.charts-section').classList.remove('visible');
+			
+			document.querySelector('.reset-button').classList.add('hidden');
+			
+			// Scroll suave de volta ao topo do formulário
+			document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}		
     </script>
 </body>
 </html>
